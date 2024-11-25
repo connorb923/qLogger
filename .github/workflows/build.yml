@@ -65,9 +65,3 @@ jobs:
     - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       run: ctest --build-config ${{ matrix.build_type }}
-
-    - name: Upload Build Results as an Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: qLoggerbuild-${{ github.sha }}-${{ matrix.os }}-${{ matrix.c_compiler }}
-        path: ${{ steps.strings.outputs.build-output-dir }}
