@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <fstream>
+#include <iostream>
 #include <filesystem>
 #include <string>
 #include <ctime>
@@ -11,7 +12,7 @@ public:
     ~qLogger();
 
     void Clear();
-    bool Log(const std::string& level, const std::string& location, const std::string& msg);
+    bool Log(const std::string& level, const std::string& location, const std::string& msg, bool doCout);
 
 private:
     std::filesystem::path logFilePath;

@@ -7,4 +7,4 @@ project ("qLogger")
 add_executable (qLogger 
     "src/logger.cpp"
     "src/logger.hpp"
-)
+ "test/test.cpp")

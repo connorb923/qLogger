@@ -1,6 +1,4 @@
 ﻿#include "logger.hpp"
-#include <fstream>
-#include <iostream>
 
 qLogger::qLogger(const std::filesystem::path& logFilePath):logFilePath(logFilePath) {
     logStream.open(logFilePath, std::ios::app);
@@ -27,11 +25,16 @@ void qLogger::Clear() {
     ofs.close();
 }
 
-bool qLogger::Log(const std::string& level, const std::string& location, const std::string& msg) {
+bool qLogger::Log(const std::string& level, const std::string& location, const std::string& msg, bool doCout) {
     if (!logStream.is_open()) {
-        std::cerr << "[FATAL]Log: Not init/open" << std::endl;
+        std::cerr << "[FATAL] Log: Not init/open" << std::endl;
         return false;
     }
+
+    if (doCout) {
+        std::cout << GetTimestamp() << " [" << level << "] " << location << msg << std::endl;
+    }
+
 
     logStream << "<div class='log-entry'>\n"
         << "<span class='timestamp'>" << GetTimestamp() << "</span> "
@@ -65,8 +68,4 @@ void qLogger::InitializeHtmlLogFile() {
         << ".message { color: #000000; }\n"
         << "</style>\n"
         << "</head>\n<body>\n";
-}
-
-int main() {
-    return 0;
 }
